@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Projects | Hinavita</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      color: white;
+      text-align: center;
+    }
+    h1 {
+      margin-top: 50px;
+      font-size: 3em;
+      color: #a5d6a7;
+    }
+    p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+    .projects-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+      position: relative;
+      z-index: 1;
+    }
+    .project-card {
+      background: rgba(46, 125, 50, 0.85); /* forest green overlay */
+      padding: 20px;
+      border-radius: 12px;
+      text-align: left;
+      transition: transform 0.3s, background 0.3s;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+      background: rgba(56, 142, 60, 0.95);
+    }
+    .project-card h3 {
+      margin: 0 0 10px;
+      color: #dcedc8;
+    }
+    .project-card p {
+      font-size: 0.95em;
+      color: #f1f8e9;
+      margin-bottom: 15px;
+    }
+    .project-card a {
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    footer {
+      margin-top: 40px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+  </style>
+</head>
+<body>
+  <h1>My Projects</h1>
+  <p>Here are all of my public GitHub repositories:</p>
+
+  <div class="projects-container" id="projects"></div>
+
+  <footer>
+    <p>© 2025 hinavita-png | Built with forest vibes</p>
+  </footer>
+
+  <!-- JavaScript to fetch repos -->
+  <script>
+    const username = "hinavita-png"; // your GitHub username
+    const container = document.getElementById("projects");
+
+    fetch(`https://api.github.com/users/${username}/repos`)
+      .then(response => response.json())
+      .then(repos => {
+        repos.forEach(repo => {
+          const card = document.createElement("div");
+          card.classList.add("project-card");
+
+          card.innerHTML = `
+            <h3>${repo.name}</h3>
+            <p>${repo.description || "No description provided."}</p>
+            <a href="${repo.html_url}" target="_blank"> View Repository</a>
+          `;
+
+          container.appendChild(card);
+        });
+      })
+      .catch(error => {
+        container.innerHTML = "<p> Unable to load projects right now❗❗.</p>";
+        console.error(error);
+      });
+  </script>
+</body>
+</html>
