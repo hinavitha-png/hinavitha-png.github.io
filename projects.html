@@ -3,78 +3,139 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Projects | Hinavita</title>
+  <title>Projects | Hinavita PNG</title>
   <link rel="stylesheet" href="style.css">
   <style>
+    /* Background styling */
     body {
+      margin: 0;
+      font-family: Arial, sans-serif;
       color: white;
       text-align: center;
+      background: url('forest.jpg') no-repeat center center/cover;
+      min-height: 100vh;
+      position: relative;
     }
+
+    /* Overlay for readability */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 0;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      padding: 50px 20px;
+    }
+
     h1 {
-      margin-top: 50px;
       font-size: 3em;
+      margin-bottom: 10px;
       color: #a5d6a7;
     }
+
     p {
       font-size: 1.2em;
       margin-bottom: 30px;
+      color: #e8f5e9;
     }
+
+    /* Project grid */
     .projects-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
-      padding: 20px;
       max-width: 1200px;
       margin: auto;
-      position: relative;
-      z-index: 1;
     }
+
     .project-card {
-      background: rgba(46, 125, 50, 0.85); /* forest green overlay */
+      background: rgba(46, 125, 50, 0.85);
       padding: 20px;
       border-radius: 12px;
       text-align: left;
       transition: transform 0.3s, background 0.3s;
     }
+
     .project-card:hover {
       transform: translateY(-5px);
       background: rgba(56, 142, 60, 0.95);
     }
+
     .project-card h3 {
       margin: 0 0 10px;
       color: #dcedc8;
     }
+
     .project-card p {
       font-size: 0.95em;
       color: #f1f8e9;
       margin-bottom: 15px;
     }
+
     .project-card a {
       color: #fff;
       font-weight: bold;
       text-decoration: none;
     }
+
+    /* Navigation buttons (same style as index) */
+    .buttons {
+      margin-top: 20px;
+    }
+
+    .buttons a {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      background: rgba(76, 175, 80, 0.9);
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .buttons a:hover {
+      background: rgba(56, 142, 60, 1);
+    }
+
     footer {
-      margin-top: 40px;
+      margin-top: 50px;
       padding: 20px;
-      background: rgba(0, 0, 0, 0.6);
-      border-top: 1px solid rgba(255,255,255,0.2);
+      background: rgba(0, 0, 0, 0.7);
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+      z-index: 1;
     }
   </style>
 </head>
 <body>
-  <h1>My Projects</h1>
-  <p>Here are all of my public GitHub repositories:</p>
+  <main>
+    <h1>My Projects</h1>
+    <p>Here are all of my public GitHub repositories:</p>
 
-  <div class="projects-container" id="projects"></div>
+    <!-- Project list -->
+    <div class="projects-container" id="projects"></div>
+
+    <!-- Navigation buttons -->
+    <div class="buttons">
+      <a href="index.html"> Back to Home</a>
+      <a href="https://github.com/hinavita-png" target="_blank">GitHub Profile</a>
+    </div>
+  </main>
 
   <footer>
-    <p>© 2025 hinavita-png | Built with forest vibes</p>
+    © 2025 Hinavita PNG · Built with forest vibes 😄
   </footer>
 
   <!-- JavaScript to fetch repos -->
   <script>
-    const username = "hinavita-png"; // your GitHub username
+    const username = "hinavita-png";
     const container = document.getElementById("projects");
 
     fetch(`https://api.github.com/users/${username}/repos`)
